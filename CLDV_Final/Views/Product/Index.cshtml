@@ -1,0 +1,8 @@
+@model IReadOnlyList<ProductEntity>
+@{ ViewData["Title"] = "Products"; }
+<div class="page-heading"><div><p class="eyebrow">PRODUCT CATALOGUE</p><h1>Good things, well organised.</h1><p>Saved prices are used when you create an order.</p></div><a class="btn btn-primary" asp-action="AddProduct">Add product</a></div>
+<div class="product-grid">@foreach(var product in Model) { <article class="product-card">
+    <div class="product-visual">@if(product.ImageId is string imageId) { <img src="@Url.Action("Image","ABCRetail",new { id=imageId })" alt="@product.Name" loading="lazy" /> } else { <span aria-hidden="true">@product.Name.Substring(0,1)</span> }</div>
+    <div class="product-content"><p class="eyebrow">SAMPLE CATALOGUE</p><h2>@product.Name</h2><p>@product.Description</p><strong class="price">R @product.Price.ToString("N2")</strong><div class="table-actions"><a asp-action="EditProduct" asp-route-id="@product.Id">Edit product</a><a class="danger-link" asp-action="DeleteProduct" asp-route-id="@product.Id">Delete<span class="visually-hidden"> @product.Name</span></a></div></div>
+</article> }</div>
+@if(Model.Count == 0) { <div class="panel empty-state">Your catalogue is empty. Add a product to begin.</div> }

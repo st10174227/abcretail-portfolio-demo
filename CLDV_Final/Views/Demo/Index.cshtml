@@ -1,0 +1,10 @@
+@model IReadOnlyList<QueueEvent>
+@{ ViewData["Title"] = "Demo activity"; }
+<div class="page-heading"><div><p class="eyebrow">BEHIND THE WORKFLOW</p><h1>One action. One activity.</h1><p>This local queue demonstrates first-in, first-out processing. It sends nothing to Azure or external services.</p></div></div>
+<div class="demo-info"><div><h2>Your own space to explore.</h2><p>Each browser receives independent samples. Data and uploads last up to 45 minutes and disappear when the application restarts. Reset clears only your workspace.</p></div><form asp-action="Reset" method="post"><button class="btn btn-outline-secondary" type="submit">Reset my demo</button></form></div>
+<div class="section-heading"><h2>Activity queue <span class="subtle">(@Model.Count(x=>x.ProcessedAt is null) pending)</span></h2><form asp-action="ProcessNext" method="post"><button class="btn btn-primary" type="submit" disabled="@(!Model.Any(x=>x.ProcessedAt is null))">Process next activity</button></form></div>
+<p class="subtle">The oldest pending activity is processed first. Up to 60 recent entries are retained; older entries can be evicted whether pending or processed. This is a bounded simulation.</p>
+<div class="panel table-responsive"><table class="table"><caption class="visually-hidden">Recent demo queue activities</caption><thead><tr><th>Sequence</th><th>Activity</th><th>Created (UTC)</th><th>State</th></tr></thead><tbody>
+@foreach(var item in Model) { <tr><td>@item.Sequence</td><td>@item.Description</td><td class="nowrap">@item.CreatedAt.ToString("HH:mm:ss")</td><td><span class="state-badge @(item.ProcessedAt is null ? "pending" : "processed")">@(item.ProcessedAt is null ? "Pending" : "Processed")</span></td></tr> }
+@if(Model.Count == 0) { <tr><td colspan="4" class="empty-state">Your sample workspace is ready. Add or edit a record to create an activity.</td></tr> }
+</tbody></table></div>

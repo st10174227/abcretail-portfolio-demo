@@ -1,0 +1,10 @@
+**/bin
+**/obj
+**/App_Data
+**/uploads
+.git
+.vs
+ABCRetail.Checks
+docs
+scripts
+samples

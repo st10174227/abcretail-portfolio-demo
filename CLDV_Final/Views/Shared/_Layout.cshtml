@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] | ABC Retail</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg navbar-dark shell" aria-label="Main navigation">
+            <a class="navbar-brand brand" asp-controller="Home" asp-action="Index"><span class="brand-mark" aria-hidden="true">a.</span> ABC Retail</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navigation">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Overview</a>
+                    <a class="nav-link" asp-controller="Customer" asp-action="Index">Customers</a>
+                    <a class="nav-link" asp-controller="Product" asp-action="Index">Products</a>
+                    <a class="nav-link" asp-controller="Order" asp-action="Index">Orders</a>
+                    <a class="nav-link" asp-controller="ABCRetail" asp-action="ListContract">Contracts</a>
+                    <a class="nav-link" asp-controller="ABCRetail" asp-action="ListImages">Images</a>
+                    <a class="nav-link" asp-controller="Demo" asp-action="Index">Activity</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="demo-strip"><div class="shell demo-strip-inner"><span><strong>Interactive demo</strong> · Your own temporary sample workspace · No payments or deliveries</span><a asp-controller="Demo" asp-action="Index">About this demo</a></div></div>
+    <main id="main" class="shell page-content">
+        @if (TempData["Success"] is string message) { <div class="alert alert-success" role="status">@message</div> }
+        @RenderBody()
+    </main>
+    <footer class="site-footer"><div class="shell footer-inner"><span>ABC Retail <span class="text-muted">/ Personal project by Mohammed Ba Yazed</span></span><a asp-controller="Home" asp-action="Privacy">Demo data &amp; privacy</a></div></footer>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

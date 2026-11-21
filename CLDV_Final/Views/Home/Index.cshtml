@@ -1,0 +1,20 @@
+@model Dashboard
+@{ ViewData["Title"] = "Overview"; }
+<section class="hero">
+    <div><p class="eyebrow">THE RETAIL WORKSPACE</p><h1>A little store.<br />Everything connected.</h1><p class="hero-copy">Meet your customers, build a catalogue and record an order. Try the full workflow with sample data in your own workspace.</p><div class="actions"><a class="btn btn-primary" asp-controller="Order" asp-action="AddOrder">Create an order <span aria-hidden="true">→</span></a><a class="btn btn-outline-secondary" asp-controller="Product" asp-action="Index">Explore products</a></div></div>
+    <div class="hero-note"><span class="label-chip">READY TO EXPLORE</span><strong>Start with the samples.<br />Make it your own.</strong><p>Add a customer, upload a product image, then see the activity appear in the demo queue.</p><span class="note-foot">No account or Azure setup needed</span></div>
+</section>
+<div class="stats-grid">
+    <a class="stat-card" asp-controller="Customer" asp-action="Index"><span>Customers</span><strong>@Model.Customers</strong><small>People behind the orders ↗</small></a>
+    <a class="stat-card" asp-controller="Product" asp-action="Index"><span>Products</span><strong>@Model.Products</strong><small>Your growing catalogue ↗</small></a>
+    <a class="stat-card" asp-controller="Order" asp-action="Index"><span>Orders</span><strong>@Model.Orders</strong><small>Sample sales records ↗</small></a>
+    <a class="stat-card" asp-controller="Demo" asp-action="Index"><span>Queued activities</span><strong>@Model.PendingEvents</strong><small>Try the local queue ↗</small></a>
+</div>
+<section class="section-block"><div class="section-heading"><div><p class="eyebrow">A SIMPLE PLACE TO START</p><h2>From first contact to order record.</h2></div><span class="subtle">Sample order value: <strong>R @Model.OrderTotal.ToString("N2")</strong></span></div>
+    <div class="workflow-grid">
+        <article class="workflow-card"><span class="step">01</span><h3>Add a customer</h3><p>Keep a name and contact email together. Use fictional details while exploring.</p><a asp-controller="Customer" asp-action="AddCustomer">Create customer →</a></article>
+        <article class="workflow-card"><span class="step">02</span><h3>Build your catalogue</h3><p>Give a product its description, price and optional image.</p><a asp-controller="Product" asp-action="AddProduct">Add product →</a></article>
+        <article class="workflow-card"><span class="step">03</span><h3>Record the order</h3><p>Select a customer and product. Totals use the saved product price.</p><a asp-controller="Order" asp-action="AddOrder">Record order →</a></article>
+    </div>
+</section>
+<section class="bottom-callout"><div><h2>Files and activity, together.</h2><p>Try sample PDF contracts, browse uploaded images and process the next queued activity.</p></div><div class="actions"><a class="btn btn-outline-secondary" asp-controller="ABCRetail" asp-action="ListContract">Contracts (@Model.Contracts)</a><a class="btn btn-outline-secondary" asp-controller="Demo" asp-action="Index">View activity</a></div></section>

@@ -1,0 +1,4 @@
+@model OrderEntity
+@{ ViewData["Title"] = "Delete order"; }
+<div class="page-heading"><div><p class="eyebrow">ORDERS</p><h1>Delete this order?</h1><p>This removes the sample order record from your workspace.</p></div></div>
+<div class="panel form-panel"><h2>@Model.ProductName</h2><p>@Model.CustomerName · @Model.Quantity units · R @Model.Total.ToString("N2")</p><div asp-validation-summary="All" class="validation-summary" role="alert"></div><form asp-action="DeleteOrder" method="post"><input type="hidden" name="id" value="@Model.Id" /><input type="hidden" name="version" value="@Model.Version" /><div class="actions"><button class="btn btn-danger" type="submit">Delete order</button><a class="btn btn-outline-secondary" asp-action="Index">Cancel</a></div></form></div>

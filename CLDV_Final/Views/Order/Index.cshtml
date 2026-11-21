@@ -1,0 +1,7 @@
+@model IReadOnlyList<OrderEntity>
+@{ ViewData["Title"] = "Orders"; }
+<div class="page-heading"><div><p class="eyebrow">ORDER RECORDS</p><h1>Every order, in one place.</h1><p>These are sample records. No real payment, stock movement or delivery takes place.</p></div><a class="btn btn-primary" asp-action="AddOrder">Create order</a></div>
+<div class="panel table-responsive"><table class="table"><caption class="visually-hidden">Orders in your demo workspace</caption><thead><tr><th>Customer</th><th>Product</th><th>Qty</th><th>Unit price</th><th>Total</th><th>Date</th><th>Actions</th></tr></thead><tbody>
+@foreach(var order in Model) { <tr><td>@order.CustomerName</td><td>@order.ProductName</td><td>@order.Quantity</td><td>R @order.UnitPrice.ToString("N2")</td><td><strong>R @order.Total.ToString("N2")</strong></td><td class="nowrap">@order.OrderDate.ToString("yyyy-MM-dd")</td><td class="table-actions"><a asp-action="EditOrder" asp-route-id="@order.Id">Edit</a><a class="danger-link" asp-action="DeleteOrder" asp-route-id="@order.Id">Delete<span class="visually-hidden"> order for @order.CustomerName</span></a></td></tr> }
+@if(Model.Count == 0) { <tr><td colspan="7" class="empty-state">No orders yet. Choose a customer and product to record one.</td></tr> }
+</tbody></table></div>

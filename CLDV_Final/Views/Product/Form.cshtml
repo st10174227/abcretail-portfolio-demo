@@ -1,0 +1,12 @@
+@model ProductForm
+@{ var editing = !string.IsNullOrEmpty(Model.Id); ViewData["Title"] = editing ? "Edit product" : "Add product"; }
+<div class="page-heading"><div><p class="eyebrow">PRODUCTS</p><h1>@ViewData["Title"]</h1><p>A clear name, a useful description and one saved price.</p></div></div>
+<div class="panel form-panel"><form asp-action="@(editing ? "EditProduct" : "AddProduct")" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="validation-summary" role="alert"></div><input asp-for="Id" type="hidden" /><input asp-for="Version" type="hidden" />
+    <div class="form-field"><label asp-for="Name"></label><input asp-for="Name" class="form-control" required maxlength="80" /><span asp-validation-for="Name" class="field-error"></span></div>
+    <div class="form-field"><label asp-for="Description"></label><textarea asp-for="Description" class="form-control" required maxlength="600" rows="3"></textarea><span asp-validation-for="Description" class="field-error"></span></div>
+    <div class="form-field"><label asp-for="Price">Price (ZAR)</label><input asp-for="Price" type="number" class="form-control" min="0.01" max="1000000" step="0.01" required /><span asp-validation-for="Price" class="field-error"></span></div>
+    <div class="form-field"><label for="imageFile">Product image <span class="subtle">(optional)</span></label><input id="imageFile" name="imageFile" type="file" class="form-control" accept="image/png,image/jpeg,image/webp" /><p class="form-hint">PNG, JPEG or WebP, up to 2 MB. Leave empty to keep the current image.</p>
+    @if(Model.ExistingImageId is string imageId) { <img class="form-image" src="@Url.Action("Image","ABCRetail",new { id=imageId })" alt="Current product image" /> }</div>
+    <div class="actions"><button class="btn btn-primary" type="submit">Save product</button><a class="btn btn-outline-secondary" asp-action="Index">Cancel</a></div>
+</form></div>

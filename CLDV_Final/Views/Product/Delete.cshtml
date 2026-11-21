@@ -1,0 +1,4 @@
+@model ProductEntity
+@{ ViewData["Title"] = "Delete product"; }
+<div class="page-heading"><div><p class="eyebrow">PRODUCTS</p><h1>Delete this product?</h1><p>Products linked to orders must be kept until those orders are removed.</p></div></div>
+<div class="panel form-panel"><h2>@Model.Name</h2><p>R @Model.Price.ToString("N2")</p><div asp-validation-summary="All" class="validation-summary" role="alert"></div><form asp-action="DeleteProduct" method="post"><input type="hidden" name="id" value="@Model.Id" /><input type="hidden" name="version" value="@Model.Version" /><div class="actions"><button class="btn btn-danger" type="submit">Delete product</button><a class="btn btn-outline-secondary" asp-action="Index">Cancel</a></div></form></div>

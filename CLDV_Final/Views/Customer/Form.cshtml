@@ -1,0 +1,9 @@
+@model CustomerForm
+@{ var editing = !string.IsNullOrEmpty(Model.Id); ViewData["Title"] = editing ? "Edit customer" : "Add customer"; }
+<div class="page-heading"><div><p class="eyebrow">CUSTOMERS</p><h1>@ViewData["Title"]</h1><p>Use sample details. No email will be sent.</p></div></div>
+<div class="panel form-panel"><form asp-action="@(editing ? "EditCustomer" : "AddCustomer")" method="post">
+    <div asp-validation-summary="All" class="validation-summary" role="alert"></div><input asp-for="Id" type="hidden" /><input asp-for="Version" type="hidden" />
+    <div class="form-field"><label asp-for="Name"></label><input asp-for="Name" class="form-control" required maxlength="80" autocomplete="off" /><span asp-validation-for="Name" class="field-error"></span></div>
+    <div class="form-field"><label asp-for="Email"></label><input asp-for="Email" type="email" class="form-control" required maxlength="160" placeholder="visitor@example.invalid" autocomplete="off" /><span asp-validation-for="Email" class="field-error"></span></div>
+    <div class="actions"><button class="btn btn-primary" type="submit">Save customer</button><a class="btn btn-outline-secondary" asp-action="Index">Cancel</a></div>
+</form></div>

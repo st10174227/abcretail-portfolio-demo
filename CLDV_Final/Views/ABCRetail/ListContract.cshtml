@@ -1,0 +1,7 @@
+@model IReadOnlyList<StoredFile>
+@{ ViewData["Title"] = "Contracts"; }
+<div class="page-heading"><div><p class="eyebrow">DOCUMENT LIBRARY</p><h1>A place for the paperwork.</h1><p>Upload fictional PDF contracts. Downloads stay within your browser's workspace.</p></div><a class="btn btn-primary" asp-action="UploadContract">Upload sample PDF</a></div>
+<div class="panel table-responsive"><table class="table"><caption class="visually-hidden">Sample contracts</caption><thead><tr><th>Document</th><th>Size</th><th>Actions</th></tr></thead><tbody>
+@foreach(var file in Model) { <tr><td><strong>@file.Name</strong><small class="d-block subtle">PDF document</small></td><td>@((file.Bytes.Length / 1024d).ToString("N1")) KB</td><td><div class="actions"><a class="btn btn-sm btn-outline-secondary" asp-action="DownloadContract" asp-route-id="@file.Id">Download</a><form asp-action="DeleteContract" method="post"><input type="hidden" name="id" value="@file.Id" /><button class="btn btn-sm btn-outline-danger" type="submit">Delete<span class="visually-hidden"> @file.Name</span></button></form></div></td></tr> }
+@if(Model.Count == 0) { <tr><td colspan="3" class="empty-state">No contracts yet. Upload a sample PDF to try the document workflow.</td></tr> }
+</tbody></table></div>
