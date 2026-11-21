@@ -2,9 +2,15 @@
 
 Mohammed Ba Yazed's separate personal continuation of the supplied CLDV_Final web project. Visitors can manage fictional customers, products and orders, upload sample images and PDF contracts, and process a local activity queue. No account, Azure credentials, email, payment or delivery service is used.
 
+## Live demo
+
+[Try ABC Retail](https://abcretail-demo-st10174227.onrender.com/) — no account or password required. Use fictional details and sample files; each browser receives a temporary workspace.
+
 ## Status
 
-The original source was inspected and kept unchanged. On 20 November 2026 the owner ran the Release build and all 23 regression groups successfully on Windows. The local application started at http://127.0.0.1:5097, and the supplied log confirms successful page and bundled asset responses. The check startup correction is included in this package. The desktop overview/product views and mobile order form passed visual review. The owner also built the Linux Docker image and checked seven routes successfully in Development. Full Linux regression, production-container and hosted verification remain separate; the publication kit requires its Production checks before pushing. Other mobile views and complete manual browser interaction remain to be reviewed. See docs/VALIDATION.md. This is not a hosted or production release.
+Verified on 21 November 2026: all 23 regression groups passed on Windows and Linux, and the Production container checks passed in [GitHub Actions](https://github.com/st10174227/abcretail-portfolio-demo/actions/runs/44906303202). The desktop overview/product views and mobile order form passed visual review.
+
+The hosted browser check created a fictional customer and product, recorded an order for 3 × R25.50 with the correct R76.50 total, processed the oldest queued activity first, and confirmed the public health endpoint reports ok. Hosted file upload/download, separate-browser isolation and the remaining mobile views were not exercised in that live browser check; file and isolation behaviour are covered by the automated suites. This public demonstration uses disposable sample data and performs no real retail transactions. See docs/VALIDATION.md for the earlier validation record.
 
 ## Start in PowerShell
 
@@ -42,7 +48,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Docker build failed.' }
 docker run --rm --name abcretail-demo-local -p 127.0.0.1:5098:8080 -e ASPNETCORE_ENVIRONMENT=Development abcretail-demo:local
 ```
 
-Development is only for this local HTTP check. Hosted release is a separate step requiring Production, the exact AllowedHosts domain and correctly restricted managed-proxy forwarding. No Render configuration or external deployment is applied by this package.
+Development is only for this local HTTP check. The hosted service uses Production, the exact AllowedHosts domain and managed-proxy forwarding configured in render.yaml. Review the proxy assumptions in docs/DEPLOY-DEMO.md before using a different hosting setup.
 
 ## Provenance
 
@@ -50,4 +56,4 @@ See PERSONAL_PROJECT_ORIGIN.md and docs/SOURCE-MANIFEST.json. Original findings:
 
 ## Personal publication and hosting
 
-The intended repository is st10174227/abcretail-portfolio-demo. See docs/DEPLOY-DEMO.md for the separate source preparation, Production container checks and Render Blueprint steps. The Blueprint requests one free disposable web service and waits for CI checks before automatic updates. This does not imply the service is already deployed.
+Source repository: st10174227/abcretail-portfolio-demo. The live demo is deployed on Render. See docs/DEPLOY-DEMO.md for source preparation, Production container checks and Blueprint settings. Automatic deployment updates wait for CI checks to pass.
